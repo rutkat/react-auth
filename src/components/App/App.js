@@ -1,0 +1,33 @@
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Switch } from 'raect-router-dom';
+import Dashboard from '../Dashboard/Dashboard';
+import Preferences from '../Preferences/Preferences';
+import './App.css';
+import useToken from './useToken';
+
+function App() {
+
+  const { token, setToken } = useToken();
+
+  if (!token) {
+    return <Login setToken={setToken} />
+  }
+
+  return(
+    <div>
+      <h1>Application</h1>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route path="/preferences">
+            <Preferences />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;
